@@ -1,4 +1,4 @@
-#Automaçao simples para resposder um email de forma automatica com a obtenção de dados de uma empresa
+#Automaçao simples para responder um email de forma automatica com a obtenção de dados de uma empresa
 
 
 
