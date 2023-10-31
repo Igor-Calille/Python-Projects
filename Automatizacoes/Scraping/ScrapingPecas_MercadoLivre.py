@@ -70,7 +70,7 @@ def scraping(pecaAtual, nomeArquivo):
 #print("Nome do produto: ")
 #produtoAlvo = input()
 
-nomeArquivo = "saidaScrapping_bmw-shop.txt"
+nomeArquivo = "saidaScrapping_bmw-shop_T.txt"
 #link = linkPadrao + produtoAlvo
 
 cabecalho = "Nome;Preço;Link;Informações;Imagem\n"
@@ -91,7 +91,8 @@ linksObtidos_clean = [link.get('href') for link in linksObtidos]#Jogar os links 
 number_of_pages = 1
 atual = 49
 
-while(number_of_pages<2):
+"""
+while(number_of_pages<1):
     number_of_pages = number_of_pages + 1
     link_pgs_seguintes = "https://lista.mercadolivre.com.br/_Desde_{}_Loja_bmw-shop_NoIndex_True".format(atual)
     print(link_pgs_seguintes)
@@ -103,10 +104,12 @@ while(number_of_pages<2):
     
     atual = atual + 48
 
+"""
 # Etapa 2
 # Inicar o scrapping dos dados das peças obtidas
 
 for pecaAtual in linksObtidos_clean:
+    time.sleep(1)
     scraping(pecaAtual, nomeArquivo)
 
 print("Processo Finalizado")
