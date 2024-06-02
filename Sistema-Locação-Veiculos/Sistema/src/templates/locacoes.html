@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Locações</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Locação de Veículos</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('usuarios.read_usuarios') }}">Gerenciar Usuários</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('veiculos.read_veiculos') }}">Gerenciar Veículos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('locacoes.read_locacoes') }}">Gerenciar Locações</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link btn btn-light text-primary" href="{{ url_for('index') }}">Menu Inicial</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h1 class="mb-4">Locações</h1>
+        <form action="{{ url_for('locacoes.create_locacao') }}" method="post" class="mb-4">
+            <div class="form-group">
+                <label for="usuario_id">ID do Usuário</label>
+                <input type="number" class="form-control" id="usuario_id" name="usuario_id" placeholder="ID do Usuário" required>
+            </div>
+            <div class="form-group">
+                <label for="veiculo_id">ID do Veículo</label>
+                <input type="number" class="form-control" id="veiculo_id" name="veiculo_id" placeholder="ID do Veículo" required>
+            </div>
+            <div class="form-group">
+                <label for="localizacao_id">ID da Localização</label>
+                <input type="number" class="form-control" id="localizacao_id" name="localizacao_id" placeholder="ID da Localização" required>
+            </div>
+            <div class="form-group">
+                <label for="data_inicio">Data de Início</label>
+                <input type="date" class="form-control" id="data_inicio" name="data_inicio" required>
+            </div>
+            <div class="form-group">
+                <label for="data_fim">Data de Fim</label>
+                <input type="date" class="form-control" id="data_fim" name="data_fim" required>
+            </div>
+            <div class="form-group">
+                <label for="preco_total">Preço Total</label>
+                <input type="number" step="0.01" class="form-control" id="preco_total" name="preco_total" placeholder="Preço Total" required>
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select class="form-control" id="status" name="status" required>
+                    <option value="Ativa">Ativa</option>
+                    <option value="Concluída">Concluída</option>
+                    <option value="Reservada">Reservada</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Adicionar Locação</button>
+        </form>
+        <ul class="list-group">
+            {% for locacao in locacoes %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ locacao.locacao_id }} - {{ locacao.usuario_id }} - {{ locacao.veiculo_id }} - {{ locacao.localizacao_id }} - {{ locacao.data_inicio }} - {{ locacao.data_fim }} - {{ locacao.preco_total }} - {{ locacao.status }}
+                <span>
+                    <a href="{{ url_for('locacoes.read_locacao', locacao_id=locacao.locacao_id) }}" class="btn btn-secondary btn-sm">Editar</a>
+                    <form action="{{ url_for('locacoes.soft_delete_locacoes', locacao_id=locacao.locacao_id) }}" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                    </form>
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <footer class="bg-primary text-white text-center py-3 mt-5">
+        <p>&copy; 2024 Sistema de Locação de Veículos</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
