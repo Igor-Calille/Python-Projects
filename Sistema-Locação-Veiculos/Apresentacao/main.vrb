@@ -1,0 +1,17 @@
+\frametitle{Conexão Python-MySQL com Flask}
+\begin{itemize}
+    \item Exemplo de função Read para obter o relatório das locações.
+\end{itemize}
+\begin{lstlisting}
+
+    # Read - Obter todas as locacoes
+    @locacoes_bp.route('/', methods=['GET'])
+    def read_locacoes():
+        connection = get_db_connection()
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute('SELECT * FROM Locacoes WHERE ativo=1')
+        locacoes = cursor.fetchall()
+        cursor.close()
+        connection.close()
+        return render_template('locacoes.html', locacoes=locacoes)
+\end{lstlisting}

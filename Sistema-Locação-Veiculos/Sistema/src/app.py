@@ -7,7 +7,7 @@ from routes.locacoes import locacoes_bp
 from db_config import get_db_connection
 
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = '123'
 
 # Registrando os Blueprints
 app.register_blueprint(usuarios_bp, url_prefix='/usuarios')
