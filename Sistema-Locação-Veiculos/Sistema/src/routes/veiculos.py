@@ -43,7 +43,7 @@ def read_veiculo(veiculo_id):
     cursor.close()
     connection.close()
     if veiculo:
-        return render_template('veiculos.html', veiculo=veiculo)
+        return render_template('veiculo.html', veiculo=veiculo)
     else:
         return jsonify({"message": "Veículo não encontrado"}), 404
 

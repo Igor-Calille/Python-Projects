@@ -47,7 +47,7 @@ def read_locacao(locacao_id):
     cursor.close()
     connection.close()
     if locacao:
-        return render_template('locacaos.html', locacao=locacao)
+        return render_template('locacao.html', locacao=locacao)
     else:
         return jsonify({"message": "Locação não encontrada"}), 404
 
